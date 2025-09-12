@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon Game</title>
+    <style>
+        :root {
+            --background-color-dark: #121212;
+            --background-color-light: #202020;
+            --accent-color-1: #58a6ff;
+            --accent-color-2: #2196F3;
+        }
+
+        body {
+            font-family: 'Balsamiq Sans', cursive;
+            background-color: var(--background-color-dark);
+            color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Best Background Animations --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--background-color-dark) 50%, #1a1a1a 100%);
+            background-size: 200% 200%;
+            animation: color-shift 20s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%232a2a2a' fill-opacity='0.4'%3E%3Cpath d='M80 0H0v80h80V0zm-40 2L2 40l38 38 38-38L40 2zM40 8l30 30-30 30-30-30 30-30z'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px;
+            animation: background-move 40s linear infinite;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        @keyframes color-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes background-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 80px 80px; }
+        }
+
+        /* --- Simon Game Styles --- */
+        .game-board {
+            display: grid;
+            grid-template-columns: 150px 150px;
+            grid-template-rows: 150px 150px;
+            gap: 20px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .game-button {
+            width: 150px;
+            height: 150px;
+            border: 10px solid #111;
+            cursor: pointer;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        #green {
+            background-color: #00a74a;
+            border-top-left-radius: 100%;
+        }
+
+        #red {
+            background-color: #9f0f17;
+            border-top-right-radius: 100%;
+        }
+
+        #yellow {
+            background-color: #cca61b;
+            border-bottom-left-radius: 100%;
+        }
+
+        #blue {
+            background-color: #094a8f;
+            border-bottom-right-radius: 100%;
+        }
+
+        .controls {
+            margin: 30px 0;
+            text-align: center;
+            z-index: 10;
+        }
+
+        #start-btn, #info-display {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #58a6ff;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        #start-btn:hover {
+            background-color: #007bff;
+        }
+
+        #info-display {
+            background-color: rgba(0, 0, 0, 0.4);
+            cursor: default;
+            margin-left: 20px;
+        }
+
+        .flash {
+            filter: brightness(1.5);
+        }
+        
+        .disabled {
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="game-board" id="game-board">
+        <div class="game-button" id="green" data-color="green"></div>
+        <div class="game-button" id="red" data-color="red"></div>
+        <div class="game-button" id="yellow" data-color="yellow"></div>
+        <div class="game-button" id="blue" data-color="blue"></div>
+    </div>
+
+    <div class="controls">
+        <button id="start-btn">Start Game</button>
+        <span id="info-display">Level: 1</span>
+    </div>
+
+    <script>
+        // --- Existing Simon Game Logic Here ---
+        const green = document.getElementById('green');
+        const red = document.getElementById('red');
+        const yellow = document.getElementById('yellow');
+        const blue = document.getElementById('blue');
+        const startBtn = document.getElementById('start-btn');
+        const infoDisplay = document.getElementById('info-display');
+        const gameBoard = document.getElementById('game-board');
+
+        let sequence = [];
+        let playerSequence = [];
+        let level = 1;
+        let isPlayerTurn = false;
+
+        const colors = [green, red, yellow, blue];
+        const audio = {
+            green: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound1.mp3'),
+            red: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound2.mp3'),
+            yellow: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound3.mp3'),
+            blue: new Audio('https://s3.amazonaws.com/freecodecamp/simonSound4.mp3')
+        };
+
+        function flashColor(element) {
+            element.classList.add('flash');
+            audio[element.dataset.color].play();
+            setTimeout(() => {
+                element.classList.remove('flash');
+            }, 300);
+        }
+
+        function playSequence() {
+            let i = 0;
+            const interval = setInterval(() => {
+                flashColor(sequence[i]);
+                i++;
+                if (i >= sequence.length) {
+                    clearInterval(interval);
+                    isPlayerTurn = true;
+                }
+            }, 600);
+        }
+
+        function addColorToSequence() {
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            sequence.push(randomColor);
+        }
+
+        function checkPlayerInput(clickedElement) {
+            if (!isPlayerTurn) return;
+
+            playerSequence.push(clickedElement);
+            flashColor(clickedElement);
+
+            const index = playerSequence.length - 1;
+            if (playerSequence[index] !== sequence[index]) {
+                alert(`Game Over! You reached Level ${level}.`);
+                resetGame();
+                return;
+            }
+
+            if (playerSequence.length === sequence.length) {
+                isPlayerTurn = false;
+                playerSequence = [];
+                level++;
+                infoDisplay.textContent = `Level: ${level}`;
+                setTimeout(nextRound, 1000);
+            }
+        }
+
+        function nextRound() {
+            addColorToSequence();
+            playSequence();
+        }
+
+        function resetGame() {
+            sequence = [];
+            playerSequence = [];
+            level = 1;
+            isPlayerTurn = false;
+            infoDisplay.textContent = `Level: 1`;
+        }
+
+        startBtn.addEventListener('click', () => {
+            resetGame();
+            nextRound();
+        });
+
+        gameBoard.addEventListener('click', (event) => {
+            if (event.target.classList.contains('game-button')) {
+                checkPlayerInput(event.target);
+            }
+        });
+    </script>
+</body>
+</html>
