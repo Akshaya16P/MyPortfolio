@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    
+    <link rel="stylesheet" href="project.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo">Akshaya</a>
+            <nav class="nav" id="nav">
+                <a href="index.html">Home</a>
+                <a href="education.html">Education</a>
+                <a href="experience.html">Experience</a>
+                <a href="projects.html" class="active">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-container projects-page-main">
+            <section class="section-content">
+                <h1 class="section-title">My Projects</h1>
+
+                <div class="project-item reveal-item">
+                    <div class="project-info">
+                        <h2 class="project-heading">Tic-Tac-Toe Game</h2>
+                        <p>A classic Tic-Tac-Toe game built with pure HTML, CSS, and JavaScript. This project showcases fundamental game logic, DOM manipulation, and state management.</p>
+                        <ul>
+                            <li><i class="fas fa-arrow-right"></i> Implemented game state management for turns and board status.</li>
+                            <li><i class="fas fa-arrow-right"></i> Designed intuitive UI for player interaction.</li>
+                            <li><i class="fas fa-arrow-right"></i> Developed win condition checking algorithms.</li>
+                        </ul>
+                        <a href="https://github.com/yourusername/tic-tac-toe" class="project-link" target="_blank">View on GitHub <i class="fab fa-github"></i></a>
+                    </div>
+                    <div class="project-image-container">
+                        <img src="tic-tac-toe.gif" alt="Tic-Tac-Toe Game" class="project-graphic">
+                    </div>
+                </div>
+
+                <div class="project-item reverse reveal-item">
+                    <div class="project-image-container">
+                        <img src="simen.gif" alt="Simon Game" class="project-graphic">
+                    </div>
+                    <div class="project-info">
+                        <h2 class="project-heading">Simon Game</h2>
+                        <p>An interactive memory game inspired by the classic Simon game. This project demonstrates skills in handling asynchronous events, managing sound effects, and creating a dynamic user experience.</p>
+                        <ul>
+                            <li><i class="fas fa-arrow-right"></i> Implemented asynchronous sequences for game patterns.</li>
+                            <li><i class="fas fa-arrow-right"></i> Managed user input and sequence matching logic.</li>
+                            <li><i class="fas fa-arrow-right"></i> Integrated sound effects for enhanced feedback.</li>
+                        </ul>
+                        <a href="https://github.com/yourusername/simon-game" class="project-link" target="_blank">View on GitHub <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-item reveal-item">
+                    <div class="project-info">
+                        <h2 class="project-heading">Flower Shop Website</h2>
+                        <p>A modern, responsive e-commerce landing page for a flower shop. This project highlights proficiency in front-end design, responsive layout, and engaging UI/UX.</p>
+                        <ul>
+                            <li><i class="fas fa-arrow-right"></i> Designed a clean and appealing user interface.</li>
+                            <li><i class="fas fa-arrow-right"></i> Implemented responsive design using Flexbox and Grid.</li>
+                            <li><i class="fas fa-arrow-right"></i> Showcased product display and calls to action.</li>
+                        </ul>
+                        <a href="https://github.com/yourusername/flower-shop" class="project-link" target="_blank">View on GitHub <i class="fab fa-github"></i></a>
+                    </div>
+                    <div class="project-image-container">
+                        <img src="flowers.webp" alt="Flower Shop Website" class="project-graphic">
+                    </div>
+                </div>
+
+                <div class="project-item reverse reveal-item">
+                    <div class="project-image-container">
+                        <img src="unilink.jpg" alt="Unlink File Utility" class="project-graphic">
+                    </div>
+                    <div class="project-info">
+                        <h2 class="project-heading">Unlink File System Utility</h2>
+                        <p>A conceptual backend project demonstrating secure file system operations, specifically file deletion (unlink) using server-side languages.</p>
+                        <ul>
+                            <li><i class="fas fa-arrow-right"></i> Explored secure file handling practices.</li>
+                            <li><i class="fas fa-arrow-right"></i> Implemented file existence checks before deletion.</li>
+                            <li><i class="fas fa-arrow-right"></i> Showcased backend logic for system interactions.</li>
+                        </ul>
+                        <a href="https://github.com/yourusername/unlink-file-utility" class="project-link" target="_blank">View on GitHub <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-social-links">
+            <a href="https://www.linkedin.com/in/akshaya-p-839b70290/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Akshaya16P" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; <span id="current-year"></span> Akshaya Pandi. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

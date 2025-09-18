@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Education</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="education.html" class="active">Education</a></li>
+                <li><a href="experience.html">Experience</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="education-section">
+        <h1 class="section-title">My Education</h1>
+
+        <div class="timeline-container">
+            <div class="timeline-item reveal-item">
+                <div class="timeline-meta">
+                    <div class="timeline-year">2023 - Present</div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="education-card">
+                    <div class="header-details">
+                        <img src="./images/aditya-logo.png" alt="Aditya College Logo" class="college-logo">
+                        <div>
+                            <h2>B.Tech in Information Technology</h2>
+                            <p class="university-name">Aditya College of Engineering and Technology</p>
+                        </div>
+                    </div>
+                    <div class="meta-info">
+                        <span><i class="fas fa-map-marker-alt"></i> Surampalem, Andhra Pradesh</span>
+                        <span><i class="fas fa-star"></i> CGPA: 8.68/10</span>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement-chip" onclick="showCertificate('university-marks.jpg')">View GPA Certificate</div>
+                        <div class="achievement-chip">NPTEL Certificate in Cloud Computing</div>
+                        <div class="achievement-chip">Runner-up in coding competition</div>
+                    </div>
+                    <div class="more-details">
+                        <p>Specialized in Information Technology with a focus on web development. Actively engaged in projects using **HTML, CSS, and JavaScript**. Developed and maintained responsive websites, demonstrating a strong understanding of UI/UX principles and cross-browser compatibility.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal-item">
+                <div class="timeline-meta">
+                    <div class="timeline-year">2021 - 2023</div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="education-card">
+                    <div class="header-details">
+                        <img src="./images/aditya-logo.png" alt="Aditya College Logo" class="college-logo">
+                        <div>
+                            <h2>Intermediate</h2>
+                            <p class="university-name">Sri Chaitanya Junior College</p>
+                        </div>
+                    </div>
+                    <div class="meta-info">
+                        <span><i class="fas fa-map-marker-alt"></i> P.M. Palem</span>
+                        <span><i class="fas fa-star"></i> Percentage: 93.3%</span>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement-chip" onclick="showCertificate('intermediate-marks.jpg')">View Marks Certificate</div>
+                    </div>
+                    <div class="more-details">
+                        <p>Focused on a strong foundation in Mathematics, Physics, and Chemistry (MPC). This period helped build a solid base in logical reasoning and problem-solving, preparing me for the technical challenges of my university studies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal-item">
+                <div class="timeline-meta">
+                    <div class="timeline-year">2017</div>
+                    <div class="timeline-dot"></div>
+                </div>
+                <div class="education-card">
+                    <div class="header-details">
+                        <img src="./images/school-logo.png" alt="School Logo" class="college-logo">
+                        <div>
+                            <h2>10th Class</h2>
+                            <p class="university-name">High School Name</p>
+                        </div>
+                    </div>
+                    <div class="meta-info">
+                        <span><i class="fas fa-map-marker-alt"></i> Location of School</span>
+                        <span><i class="fas fa-star"></i> Marks: 587/600</span>
+                    </div>
+                    <div class="achievements">
+                        <div class="achievement-chip" onclick="showCertificate('10th-marks.jpg')">View Marks Certificate</div>
+                    </div>
+                    <div class="more-details">
+                        <p>My secondary education provided a broad foundation across various subjects. I was particularly interested in science and mathematics, consistently achieving high scores and participating in academic quizzes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="certificate-modal" class="modal">
+        <span class="close-btn-modal" onclick="closeCertificate()">&times;</span>
+        <img class="modal-content" id="modal-certificate">
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
